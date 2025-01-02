@@ -1,3 +1,10 @@
+interface Book {
+  id: number;
+  name: string;
+  type: string;
+  available: boolean;
+}
+
 export const metadata = {
   title: "Books List",
   description:
@@ -16,7 +23,7 @@ async function fetchBooks() {
 
 export default async function BooksPage() {
   try {
-    const books = await fetchBooks();
+    const books: Book[] = await fetchBooks();
 
     return (
       <div className="min-h-screen bg-gray-100 py-10 px-5">
@@ -25,7 +32,7 @@ export default async function BooksPage() {
         </h1>
         <div className="max-w-5xl mx-auto">
           <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {books.map((book: any) => (
+            {books.map((book) => (
               <li
                 key={book.id}
                 className="bg-white shadow-lg rounded-lg p-6 border border-gray-200 transition-transform hover:scale-105 hover:shadow-xl"
@@ -50,7 +57,7 @@ export default async function BooksPage() {
         </div>
       </div>
     );
-  } catch (error) {
+  } catch {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <p className="text-red-600 font-bold">Error fetching books.</p>
